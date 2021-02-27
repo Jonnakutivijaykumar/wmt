@@ -64,18 +64,15 @@ class Registration extends Component {
       form: { getFieldDecorator, getFieldError },
     } = this.props;
     return (
-      <View style={{ flex: 1, padding: 40, justifyContent: "center" }}>
+      <View style={{ flex: 1, padding: 40, justifyContent: "center", backgroundColor:'#fff' }}>
         <Image
           source={require("../images/logo.png")}
           style={{ width: 100, height: 100, alignSelf: "center" }}
         />
 
         <Formik
-          initialValues={{ email: "", username: "" }}
-          validationSchema={this.getValidation()}
-          validateOnChange={false}
-          validateOnBlur={false}
-          // onSubmit={(values) => console.log(values)}
+          initialValues={{ email: "", username: "", password: "", confirmPassword: "" }}
+          validationSchema={this.getValidation}
           onSubmit={(values, formikActions) => {
             this.onSubmit(values);
             setTimeout(() => {
@@ -83,7 +80,7 @@ class Registration extends Component {
             }, 500);
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
             <View>
               <TextInput
                 placeholder={"Username"}
@@ -92,7 +89,7 @@ class Registration extends Component {
                 style={styles.inputs}
                 value={values.username}
               />
-              {errors.username ? (
+              {errors.username && touched.username ? (
                 <Text style={{ color: "red", paddingHorizontal: 5 }}>
                   {errors.username}
                 </Text>
@@ -104,7 +101,7 @@ class Registration extends Component {
                 value={values.email}
                 style={styles.inputs}
               />
-              {errors.email ? (
+              {errors.email  && touched.email ? (
                 <Text style={{ color: "red", paddingHorizontal: 5 }}>
                   {errors.email}
                 </Text>
@@ -118,7 +115,7 @@ class Registration extends Component {
                 style={styles.inputs}
                 secureTextEntry={true}
               />
-              {errors.password ? (
+              {errors.password && touched.password ? (
                 <Text style={{ color: "red", paddingHorizontal: 5 }}>
                   {errors.password}
                 </Text>
@@ -132,7 +129,7 @@ class Registration extends Component {
                 style={styles.inputs}
                 secureTextEntry={true}
               />
-              {errors.confirmPassword ? (
+              {errors.confirmPassword && touched.confirmPassword ? (
                 <Text style={{ color: "red", paddingHorizontal: 5 }}>
                   {errors.confirmPassword}
                 </Text>
