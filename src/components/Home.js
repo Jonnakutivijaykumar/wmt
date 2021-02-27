@@ -33,20 +33,17 @@ export default class Home extends Component {
   apiCall = async () => {
     var that = this;
     that.page = that.page + 1;
-    console.log(" *********** call " + this.page);
     try {
       that.setState({ fetchingStatus: true });
       const res = await api.get(
         "http://68.183.48.101:3333/users/list?page=" + that.page
       );
-      console.log(res.data.data.users[0].username);
       that.setState({
         responseList: [...this.state.responseList, ...res.data.data.users],
         isLoading: false,
         setOnLoad: true,
       });
     } catch (error) {
-      console.error(error);
       that.setState({ setOnLoad: false, fetchingStatus: false });
     }
   };
