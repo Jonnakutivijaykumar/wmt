@@ -140,7 +140,7 @@ class Registration extends Component {
 
               <TouchableOpacity
                 style={{
-                  backgroundColor: "lightblue",
+                  backgroundColor: "#00bcd4",
                   alignSelf: "center",
                   borderRadius: 15,
                   marginVertical: 10,
